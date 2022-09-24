@@ -1,0 +1,185 @@
+
+{
+    "locations": [
+        {
+            "Latitude": 51.53327931,
+            "Longitude": -0.1262990617,
+            "Altitude": 16.46697423,
+            "Identifier": "Alice",
+            "Timestamp": 12918,
+            "Floor label": 5,
+            "Horizontal accuracy": 21.2304,
+            "Vertical accuracy": 3.13902,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53331396,
+            "Longitude": -0.1262161159,
+            "Altitude": 16.71290428,
+            "Identifier": "Alice",
+            "Timestamp": 133982,
+            "Floor label": 5,
+            "Horizontal accuracy": 19.23299,
+            "Vertical accuracy": 4.930313,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53331153,
+            "Longitude": -0.1261599194,
+            "Altitude": 17.04387242,
+            "Identifier": "Alice",
+            "Timestamp": 267813,
+            "Floor label": 6,
+            "Horizontal accuracy": 18.2302031,
+            "Vertical accuracy": 4.39101,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53336225,
+            "Longitude": -0.1260916902,
+            "Altitude": 17.9089128,
+            "Identifier": "Alice",
+            "Timestamp": 401928,
+            "Floor label": 6,
+            "Horizontal accuracy": 17.420123,
+            "Vertical accuracy": 3.2931,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53341246,
+            "Longitude": -0.1260293625,
+            "Altitude": 18.90726471,
+            "Identifier": "Alice",
+            "Timestamp": 530032,
+            "Floor label": 7,
+            "Horizontal accuracy": 20.101393,
+            "Vertical accuracy": 4.239131,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53336434,
+            "Longitude": -0.1259663771,
+            "Altitude": 18.91917702,
+            "Identifier": "Alice",
+            "Timestamp": 668321,
+            "Floor label": 7,
+            "Horizontal accuracy": 19.239023,
+            "Vertical accuracy": 3.931103,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53330189,
+            "Longitude": -0.1259232254,
+            "Altitude": 18.81109766,
+            "Identifier": "Alice",
+            "Timestamp": 798127,
+            "Floor label": 7,
+            "Horizontal accuracy": 19.2301942,
+            "Vertical accuracy": 3.29139193,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53313737,
+            "Longitude": -0.1261815513,
+            "Altitude": 16.54171835,
+            "Identifier": "Bob",
+            "Timestamp": 9832,
+            "Floor label": 5,
+            "Horizontal accuracy": 7.92391,
+            "Vertical accuracy": 2.310931,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53313772,
+            "Longitude": -0.1261365023,
+            "Altitude": 16.57669383,
+            "Identifier": "Bob",
+            "Timestamp": 98291,
+            "Floor label": 5,
+            "Horizontal accuracy": 8.218313,
+            "Vertical accuracy": 2.3283819,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53318822,
+            "Longitude": -0.1261125224,
+            "Altitude": 16.80285405,
+            "Identifier": "Bob",
+            "Timestamp": 183273,
+            "Floor label": 5,
+            "Horizontal accuracy": 7.3291,
+            "Vertical accuracy": 3.8391293,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53320627,
+            "Longitude": -0.1260854205,
+            "Altitude": 17.05977387,
+            "Identifier": "Bob",
+            "Timestamp": 278127,
+            "Floor label": 6,
+            "Horizontal accuracy": 8.2382931,
+            "Vertical accuracy": 3.2919392,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53323298,
+            "Longitude": -0.1260453157,
+            "Altitude": 17.42833604,
+            "Identifier": "Bob",
+            "Timestamp": 372819,
+            "Floor label": 6,
+            "Horizontal accuracy": 7.1219301,
+            "Vertical accuracy": 2.32494132,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.5332331,
+            "Longitude": -0.1259854706,
+            "Altitude": 17.74937225,
+            "Identifier": "Bob",
+            "Timestamp": 469912,
+            "Floor label": 6,
+            "Horizontal accuracy": 6.91481,
+            "Vertical accuracy": 3.9201302,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53327189,
+            "Longitude": -0.1259181653,
+            "Altitude": 18.62416853,
+            "Identifier": "Bob",
+            "Timestamp": 545913,
+            "Floor label": 7,
+            "Horizontal accuracy": 6.93103,
+            "Vertical accuracy": 3.293931932,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        },
+        {
+            "Latitude": 51.53333366,
+            "Longitude": -0.125896858,
+            "Altitude": 19.30298359,
+            "Identifier": "Bob",
+            "Timestamp": 645456,
+            "Floor label": 8,
+            "Horizontal accuracy": 8.924902,
+            "Vertical accuracy": 2.3291013,
+            "Confidence in location accuracy": 0.6827,
+            "Activity": "UNKNOWN"
+        }
+    ]
+}

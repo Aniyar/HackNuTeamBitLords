@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bit Lords Google Case</title>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+    <script src="../dist/threebox.js" type="text/javascript"></script>
+    <link href="../dist/threebox.css" rel="stylesheet" />
+    <script src="config.js"></script>
+    <style>
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script type="module">
+      
+	  var request = new XMLHttpRequest();
+   request.open("GET", "dataNU.json", false);
+   request.send(null);
+   var my_JSON_object = JSON.parse(request.responseText);
+      var data = JSON.stringify(my_JSON_object);
+
+
+      if (!config)
+        console.error(
+          "Config not set! Make a copy of 'config_template.js', add in your access token, and save the file as 'config.js'."
+        );
+
+      mapboxgl.accessToken = config.accessToken;
+
+      //starting location for map
+      let popup;
+      let minZoom = 12;
+      let maxZoom = 19;
+      let toggleableLayerIds = [];
+      let mapConfig = {
+        ALL: {
+          center: [71.395313, 51.0889629], //
+          zoom: 16.25,
+          pitch: 45,
+          bearing: 0,
+        },
+        names: {
+          compositeSource: "composite",
+          compositeSourceLayer: "building",
+          compositeLayer: "3d-buildings",
+          markersLayer: "markers",
+          layertest: "layerfloor"
+        },
+      };
+
+      var map = new mapboxgl.Map({
+        style: "mapbox://styles/mapbox/outdoors-v11",
+        center: mapConfig.ALL.center,
+        zoom: mapConfig.ALL.zoom,
+        pitch: mapConfig.ALL.pitch,
+        bearing: mapConfig.ALL.bearing,
+        container: "map",
+        antialias: true,
+        hash: true,
+      });
+
+      // we can add Threebox to mapbox to add built-in mouseover/mouseout and click behaviors
+      window.tb = new Threebox(map, map.getCanvas().getContext("webgl"), {
+        defaultLights: true,
+        enableSelectingFeatures: true, //change this to false to disable fill-extrusion features selection
+        enableTooltips: true, // change this to false to disable default tooltips on fill-extrusion and 3D models
+        enableSelectingObjects: true,
+      });
+
+      import { GUI } from "https://threejs.org/examples/jsm/libs/lil-gui.module.min.js";
+      import Stats from "https://threejs.org/examples/jsm/libs/stats.module.js";
+
+      let stats, gui;
+      function animate() {
+        requestAnimationFrame(animate);
+        stats.update();
+      }
+
+      let api = {
+        fov: (Math.atan(3 / 4) * 180) / Math.PI,
+      };
+
+      function init() {
+        // stats
+        stats = new Stats();
+        map.getContainer().appendChild(stats.dom);
+        animate();
+        // gui
+        gui = new GUI();
+        gui.add(api, "fov", 2.5, 45.0).step(0.1).onChange(changeFOV);
+      }
+
+      function changeFOV() {
+        tb.fov = api.fov;
+      }
+
+      map.on("style.load", function () {
+        init();
+        // const marker2 = new mapboxgl.Marker({ color: "black" })
+        //   .setLngLat([-0.126159919379484, 51.5333115342771])
+        //   .addTo(map);
+        map.addLayer(AddMarkers());
+        map.addLayer(createCompositeLayer());
+        map.addLayer(createComposite());
+        
+
+        map.on("render", function () {
+          tb.update();
+        });
+
+        //map.on("SelectedFeatureChange", onSelectedFeatureChange);
+      });
+
+      function AddMarkers() {
+        let layer = {
+          id: "custom_layer",
+          type: "custom",
+          renderingMode: "3d",
+          onAdd: function (map, mbxContext) {
+            let jsonData = JSON.parse(data);
+            let userPoints = {};
+
+            for (var i = 0; i < jsonData.locations.length; i++) {
+              let location = jsonData.locations[i];
+              let point = [
+                location.Longitude,
+                location.Latitude,
+                location.Altitude,
+              ];
+              let name = location.Identifier;
+              if (name in userPoints) {
+                userPoints[name].push({
+                  Timestamp: location.Timestamp,
+                  Floor: location["Floor label"],
+                  point: point,
+                });
+              } else {
+                userPoints[name] = new Array();
+              }
+            }
+            console.log(userPoints);
+
+            var lines = new Array();
+            var colors = [
+              ["purple", "plum"],
+              ["red", "Salmon"],
+              ["DarkGreen", "SpringGreen"],
+              ["MidnightBlue", "LightSkyBlue"],
+            ];
+            for (let key in userPoints) {
+              var colorind = Math.floor(Math.random() * colors.length);
+              var color1 = colors[colorind][0];
+              var color2 = colors[colorind][1];
+              colors.splice(colorind, 1);
+              
+
+              var sphereTemplate = tb.sphere({
+                radius: 0.5,
+                units: "meters",
+                sides: 120,
+                color: color1,
+                material: "MeshToonMaterial",
+              });
+
+              var res = Math.max.apply(
+                Math,
+                userPoints[key].map(function (o) {
+                  return o.Timestamp;
+                })
+              );
+
+              var obj = userPoints[key].find(function (o) {
+                return o.Timestamp == res;
+              });
+              console.log(obj);
+
+              //userPoints[key].splice(userPoints[key].indexOf(obj), 1);
+            //   newSphere.addEventListener("mouseover", (event) => {});
+            //   newSphere.addEventListener("mouseout", (event) => {});
+
+            //   tb.add(newSphere);
+
+              for (var j = 0; j < userPoints[key].length; j++) {
+                var line = new Array();
+                if (j + 1 < userPoints[key].length) {
+                  line.push(userPoints[key][j].point);
+                  line.push(userPoints[key][j + 1].point);
+                  var newline = tb.line({
+                    geometry: line,
+                    color: color2,
+                    width: 10,
+                  });
+                  tb.add(newline);
+                }
+
+                let newSphere = sphereTemplate
+                  .duplicate()
+                  .setCoords(userPoints[key][j].point);
+                newSphere.addTooltip(
+                  key +
+                    " Floor: " +
+                    userPoints[key][j].Floor +
+                    " Timestamp: " +
+                    userPoints[key][j].Timestamp,
+                  true
+                );
+                tb.add(newSphere);
+              }
+            }
+          },
+          render: function (gl, matrix) {
+            tb.update();
+          },
+        };
+        return layer;
+      }
+
+      onmouseout = (event) => {};
+
+      onmouseover = (event) => {};
+
+      function createComposite() {
+        let layer = {
+          id: mapConfig.names.layertest,
+          source: mapConfig.names.compositeSource,
+          "source-layer": mapConfig.names.compositeSourceLayer,
+          filter: ["==", "extrude", "true"],
+          type: "fill-extrusion",
+          minzoom: 18.5,
+          paint: {
+            "fill-extrusion-color": [
+              "case",
+              ["boolean", ["feature-state", "select"], false],
+              "lightgreen",
+              ["boolean", ["feature-state", "hover"], false],
+              "blue",
+              "lightblue",
+            ],
+
+            // use an 'interpolate' expression to add a smooth transition effect to the
+            // buildings as the user zooms in
+            "fill-extrusion-height": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        minZoom,
+        0,
+        minZoom + 0.05,
+        7.67,
+            ],
+            "fill-extrusion-base": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              minZoom,
+              0,
+              minZoom + 0.05,
+              7.6,
+            ],
+            "fill-extrusion-opacity":0.1
+          },
+        };
+        return layer;
+      }
+
+      function createCompositeLayer() {
+        let layer = {
+          id: mapConfig.names.compositeLayer,
+          source: mapConfig.names.compositeSource,
+          "source-layer": mapConfig.names.compositeSourceLayer,
+          filter: ["==", "extrude", "true"],
+          type: "fill-extrusion",
+          minzoom: minZoom,
+          maxzoom: maxZoom,
+          paint: {
+            "fill-extrusion-color": [
+              "case",
+              ["boolean", ["feature-state", "select"], false],
+              "lightgreen",
+              ["boolean", ["feature-state", "hover"], false],
+              "lightblue",
+              "#aaa",
+            ],
+
+            // use an 'interpolate' expression to add a smooth transition effect to the
+            // buildings as the user zooms in
+            "fill-extrusion-height": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              minZoom,
+              0,
+              minZoom + 0.05,
+              ["get", "height"],
+            ],
+            "fill-extrusion-base": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              minZoom,
+              0,
+              minZoom + 0.05,
+              ["get", "min_height"],
+            ],
+            "fill-extrusion-opacity": 0.9,
+          },
+        };
+        return layer;
+      }
+
+      // //[jscastro] handler for the feature selected UI... we will create a Mapbox popup to compare with Threebox popup
+      function onSelectedFeatureChange(e) {
+        let feature = e.detail;
+        if (feature && feature.state && feature.state.select) {
+          if (popup) popup.remove();
+
+          let center = [];
+          let coords = tb.getFeatureCenter(feature, null, 0);
+
+          center.push([coords[0], coords[1]]);
+
+          //TODO: this creates a Mapbox popup in the same coords the Threebox popup to see the difference
+          popup = new mapboxgl.Popup({ offset: 0 })
+            .setLngLat(center[0].slice())
+            .setHTML("<strong>" + (feature.id || feature.type) + "</strong >")
+            .addTo(map);
+
+          let geoJson = {
+            geometry: feature.geometry,
+            type: "Feature",
+            properties: feature.properties,
+          };
+          console.log(JSON.stringify(geoJson, null, 2));
+        }
+      }
+    </script>
+  </body>
+</html>

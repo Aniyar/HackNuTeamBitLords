@@ -1,0 +1,112 @@
+{
+    "locations" : [
+    {
+        "Latitude": 51.087435, 
+        "Longitude": 71.397158,
+        "Altitude": 1.12,
+        "Identifier": "Aniyar",
+        "Timestamp": 1752,
+        "Floor label": 2,
+        "Activity": "Walking"
+    },
+    {
+        "Latitude": 51.087625,
+        "Longitude":  71.397008,
+        "Altitude": 1.12,
+        "Identifier": "Aniyar",
+        "Timestamp": 1754,
+        "Floor label": 2,
+        "Activity": "Walking"
+    },
+    {
+        "Latitude": 51.087709, 
+        "Longitude": 71.397124,
+        "Altitude": 1.12,
+        "Identifier": "Aniyar",
+        "Timestamp": 1756,
+        "Floor label": 2,
+        "Activity": "Walking"
+    },
+    {
+        "Latitude": 51.087634, 
+        "Longitude": 71.397346,
+        "Altitude": 1.12,
+        "Identifier": "Aniyar",
+        "Timestamp": 1758,
+        "Floor label": 2,
+        "Activity": "Walking"
+    },
+    {
+        "Latitude": 51.087634, 
+        "Longitude": 71.397346,
+        "Altitude": 3.127,
+        "Identifier": "Aniyar",
+        "Timestamp": 1800,
+        "Floor label": 3,
+        "Activity": "Walking"
+    },
+    {
+        "Latitude": 51.087634, 
+        "Longitude": 71.397346,
+        "Altitude": 5.12,
+        "Identifier": "Aniyar",
+        "Timestamp": 1802,
+        "Floor label": 4,
+        "Activity": "Walking"
+    },
+    {
+        "Latitude": 51.087634, 
+        "Longitude": 71.397346,
+        "Altitude": 7.67,
+        "Identifier": "Aniyar",
+        "Timestamp": 1804,
+        "Floor label": 5,
+        "Activity": "Walking"
+    },
+    {
+        "Latitude": 51.087506, 
+        "Longitude": 71.397298,
+        "Altitude": 7.67,
+        "Identifier": "Aniyar",
+        "Timestamp": 1808,
+        "Floor label": 5,
+        "Activity": "Walking"
+    },
+    {
+        "Latitude": 51.087423, 
+        "Longitude": 71.397279,
+        "Altitude": 7.67,
+        "Identifier": "Aniyar",
+        "Timestamp": 1810,
+        "Floor label": 5,
+        "Activity": "Walking"
+    },
+    {
+        "Latitude": 51.0874925415,
+        "Longitude": 71.3971262923,
+        "Altitude": 7.67,
+        "Identifier": "Aniyar",
+        "Timestamp": 1813,
+        "Floor label": 5,
+        "Activity": "Walking"
+    },
+    {
+        "Latitude": 51.0875168212,
+        "Longitude": 71.3971148979,
+        "Altitude": 7.67,
+        "Identifier": "Aniyar",
+        "Timestamp": 1815,
+        "Floor label": 5,
+        "Activity": "Walking"
+    },
+    {
+        "Latitude": 51.0875022329,
+        "Longitude": 71.3971023787,
+        "Altitude": 7.67,
+        "Identifier": "Aniyar",
+        "Timestamp": 1820,
+        "Floor label": 5,
+        "Activity": "Walking"
+    }
+]
+}
